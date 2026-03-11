@@ -1,0 +1,3680 @@
+{
+  "info": {
+    "_postman_id": "ae7df9f2-23da-4100-9409-1cd3ffe440ee",
+    "name": "Apigee Edge Management API",
+    "description": "The Apigee Edge Management API provides programmatic access to Apigee Edge\nplatform resources including API proxies, products, developers, apps,\nenvironments, deployments, caches, key-value maps, and more.\n\nBase URL: https://api.enterprise.apigee.com/v1\n\n**Authentication:** HTTP Basic Auth (username:password) or OAuth 2.0 Bearer token.\nShort path aliases are available, e.g. `/o/{org}` instead of `/organizations/{org}`.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{apigee_username}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{apigee_password}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Organizations",
+      "item": [
+        {
+          "name": "List organizations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations"
+              ]
+            },
+            "description": "**Operation ID:** `listOrganizations`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get organization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getOrganization`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update organization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateOrganization`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myorg\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"trial\",\n  \"environments\": [\n    \"string\"\n  ],\n  \"properties\": {\n    \"property\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  },\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Organizations"
+    },
+    {
+      "name": "API Proxies",
+      "item": [
+        {
+          "name": "List API proxies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis"
+              ],
+              "query": [
+                {
+                  "key": "includeRevisions",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Include revision numbers in response"
+                },
+                {
+                  "key": "includeMetaData",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Include metadata in response"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listApiProxies`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Import API proxy bundle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true,
+                  "description": "Set to 'import' to import a proxy bundle"
+                },
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true,
+                  "description": "Name of the API proxy (required when action=import)"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createApiProxy`\n\n",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get API proxy",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getApiProxy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API proxy",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteApiProxy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List revisions of an API proxy",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api/revisions",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listApiProxyRevisions`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get API proxy revision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api/revisions/:revision",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "{{format}}",
+                  "disabled": true,
+                  "description": "Set to 'bundle' to download the proxy zip"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getApiProxyRevision`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API proxy revision",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api/revisions/:revision",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteApiProxyRevision`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List policies in an API proxy revision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api/revisions/:revision/policies",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "policies"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listApiProxyPolicies`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: API Proxies"
+    },
+    {
+      "name": "Deployments",
+      "item": [
+        {
+          "name": "List all deployments in an organization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listOrgDeployments`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List deployments for an API proxy revision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listApiProxyRevisionDeployments`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get deployment details for an API proxy revision in an environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getApiProxyDeployment`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Deploy an API proxy revision to an environment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "override",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Force deployment over existing revision"
+                },
+                {
+                  "key": "delay",
+                  "value": "1",
+                  "disabled": true,
+                  "description": "Seconds to delay undeploy of the existing revision"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deployApiProxy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Undeploy an API proxy revision from an environment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "API proxy revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `undeployApiProxy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List all deployments in an environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/deployments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listEnvironmentDeployments`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Deployments"
+    },
+    {
+      "name": "Environments",
+      "item": [
+        {
+          "name": "List environments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listEnvironments`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create environment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createEnvironment`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"prod\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"properties\": {\n    \"property\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  },\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getEnvironment`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update environment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateEnvironment`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"prod\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"properties\": {\n    \"property\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  },\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete environment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteEnvironment`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Environments"
+    },
+    {
+      "name": "API Products",
+      "item": [
+        {
+          "name": "List API products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apiproducts",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Return full details instead of names only"
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true,
+                  "description": "Max number of products to return"
+                },
+                {
+                  "key": "startKey",
+                  "value": "{{startKey}}",
+                  "disabled": true,
+                  "description": "Pagination start key"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listApiProducts`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create API product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apiproducts",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createApiProduct`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MyApiProduct\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"approvalType\": \"auto\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"environments\": [\n    \"string\"\n  ],\n  \"proxies\": [\n    \"string\"\n  ],\n  \"apiResources\": [\n    \"string\"\n  ],\n  \"quota\": \"1000\",\n  \"quotaInterval\": \"1\",\n  \"quotaTimeUnit\": \"minute\",\n  \"scopes\": [\n    \"string\"\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get API product",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getApiProduct`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update API product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateApiProduct`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MyApiProduct\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"approvalType\": \"auto\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"environments\": [\n    \"string\"\n  ],\n  \"proxies\": [\n    \"string\"\n  ],\n  \"apiResources\": [\n    \"string\"\n  ],\n  \"quota\": \"1000\",\n  \"quotaInterval\": \"1\",\n  \"quotaTimeUnit\": \"minute\",\n  \"scopes\": [\n    \"string\"\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteApiProduct`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: API Products"
+    },
+    {
+      "name": "Developers",
+      "item": [
+        {
+          "name": "List developers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "startKey",
+                  "value": "{{startKey}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listDevelopers`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create developer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createDeveloper`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jane.developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"userName\": \"string\",\n  \"organizationName\": \"string\",\n  \"status\": \"active\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get developer (by email or ID)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getDeveloper`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Set developer status (active/inactive)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer?action={{action}}",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `setDeveloperStatus`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update developer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateDeveloper`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jane.developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"userName\": \"string\",\n  \"organizationName\": \"string\",\n  \"status\": \"active\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete developer",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteDeveloper`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Developers"
+    },
+    {
+      "name": "Developer Apps",
+      "item": [
+        {
+          "name": "List developer apps",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listDeveloperApps`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create developer app",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createDeveloperApp`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-mobile-app\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"callbackUrl\": \"string\",\n  \"status\": \"approved\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"apiProducts\": [\n    \"string\"\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get developer app",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getDeveloperApp`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update developer app",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateDeveloperApp`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-mobile-app\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"callbackUrl\": \"string\",\n  \"status\": \"approved\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"apiProducts\": [\n    \"string\"\n  ],\n  \"createdAt\": 0,\n  \"lastModifiedAt\": 0\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete developer app",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteDeveloperApp`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Developer Apps"
+    },
+    {
+      "name": "App Keys (Credentials)",
+      "item": [
+        {
+          "name": "Get app key (consumer key)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getAppKey`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Add API product to key or set key status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateAppKey`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"apiProducts\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete app key",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email or ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteAppKey`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: App Keys (Credentials)"
+    },
+    {
+      "name": "Caches",
+      "item": [
+        {
+          "name": "List caches",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listCaches`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create cache",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createCache`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"mycache\",\n  \"description\": \"string\",\n  \"expirySettings\": {\n    \"timeoutInSec\": {\n      \"value\": \"300\"\n    },\n    \"valuesNull\": false\n  },\n  \"inMemorySizeInKB\": 0,\n  \"maxElementsInMemory\": 0,\n  \"maxElementsOnDisk\": 0,\n  \"overflowToDisk\": false,\n  \"persistent\": false,\n  \"skipCacheIfElementSizeInKBExceeds\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get cache",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches/:cache",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches",
+                ":cache"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "cache",
+                  "value": "{{cache_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getCache`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Clear cache",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches/:cache?action={{action}}",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches",
+                ":cache"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "cache",
+                  "value": "{{cache_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `clearCache`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update cache",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches/:cache",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches",
+                ":cache"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "cache",
+                  "value": "{{cache_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateCache`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"mycache\",\n  \"description\": \"string\",\n  \"expirySettings\": {\n    \"timeoutInSec\": {\n      \"value\": \"300\"\n    },\n    \"valuesNull\": false\n  },\n  \"inMemorySizeInKB\": 0,\n  \"maxElementsInMemory\": 0,\n  \"maxElementsOnDisk\": 0,\n  \"overflowToDisk\": false,\n  \"persistent\": false,\n  \"skipCacheIfElementSizeInKBExceeds\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete cache",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/caches/:cache",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches",
+                ":cache"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "cache",
+                  "value": "{{cache_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteCache`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Caches"
+    },
+    {
+      "name": "Key Value Maps",
+      "item": [
+        {
+          "name": "List KVMs at organization scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/keyvaluemaps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listOrgKvms`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create KVM at organization scope",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/keyvaluemaps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createOrgKvm`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myKVM\",\n  \"encrypted\": false,\n  \"entry\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get KVM at organization scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/keyvaluemaps/:kvm",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getOrgKvm`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete KVM at organization scope",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/keyvaluemaps/:kvm",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteOrgKvm`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List KVMs at environment scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/keyvaluemaps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listEnvKvms`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create KVM at environment scope",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/keyvaluemaps",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createEnvKvm`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myKVM\",\n  \"encrypted\": false,\n  \"entry\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get KVM at environment scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/keyvaluemaps/:kvm",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getEnvKvm`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update KVM at environment scope",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/keyvaluemaps/:kvm",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateEnvKvm`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myKVM\",\n  \"encrypted\": false,\n  \"entry\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete KVM at environment scope",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/keyvaluemaps/:kvm",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteEnvKvm`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Key Value Maps"
+    },
+    {
+      "name": "Virtual Hosts",
+      "item": [
+        {
+          "name": "List virtual hosts",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/virtualhosts",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "virtualhosts"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listVirtualHosts`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create virtual host",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/virtualhosts",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "virtualhosts"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createVirtualHost`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"default\",\n  \"hostAliases\": [\n    \"api.example.com\"\n  ],\n  \"port\": \"443\",\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false\n  },\n  \"interfaces\": [\n    \"string\"\n  ],\n  \"retryOptions\": [\n    \"string\"\n  ],\n  \"useBuiltInFreeTrialCert\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get virtual host",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/virtualhosts/:virtualhost",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "virtualhosts",
+                ":virtualhost"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "virtualhost",
+                  "value": "{{virtualhost_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getVirtualHost`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update virtual host",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/virtualhosts/:virtualhost",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "virtualhosts",
+                ":virtualhost"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "virtualhost",
+                  "value": "{{virtualhost_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateVirtualHost`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"default\",\n  \"hostAliases\": [\n    \"api.example.com\"\n  ],\n  \"port\": \"443\",\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false\n  },\n  \"interfaces\": [\n    \"string\"\n  ],\n  \"retryOptions\": [\n    \"string\"\n  ],\n  \"useBuiltInFreeTrialCert\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete virtual host",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/virtualhosts/:virtualhost",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "virtualhosts",
+                ":virtualhost"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "virtualhost",
+                  "value": "{{virtualhost_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteVirtualHost`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Virtual Hosts"
+    },
+    {
+      "name": "Target Servers",
+      "item": [
+        {
+          "name": "List target servers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/targetservers",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listTargetServers`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create target server",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/targetservers",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createTargetServer`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myTargetServer\",\n  \"host\": \"api.backend.example.com\",\n  \"port\": 443,\n  \"isEnabled\": false,\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get target server",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getTargetServer`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update target server",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateTargetServer`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"myTargetServer\",\n  \"host\": \"api.backend.example.com\",\n  \"port\": 443,\n  \"isEnabled\": false,\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete target server",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteTargetServer`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Target Servers"
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "List all users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/users",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Operation ID:** `listUsers`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/users",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "users"
+              ]
+            },
+            "description": "**Operation ID:** `createUser`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailId\": \"developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"password\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/users/:user",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "users",
+                ":user"
+              ],
+              "variable": [
+                {
+                  "key": "user",
+                  "value": "{{user_email}}",
+                  "description": "User email address"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getUser`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update user",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/users/:user",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "users",
+                ":user"
+              ],
+              "variable": [
+                {
+                  "key": "user",
+                  "value": "{{user_email}}",
+                  "description": "User email address"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `updateUser`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"emailId\": \"developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"password\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/users/:user",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "users",
+                ":user"
+              ],
+              "variable": [
+                {
+                  "key": "user",
+                  "value": "{{user_email}}",
+                  "description": "User email address"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `deleteUser`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Users"
+    },
+    {
+      "name": "Roles",
+      "item": [
+        {
+          "name": "List user roles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/userroles",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "userroles"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listRoles`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create user role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/userroles",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "userroles"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `createRole`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"opsadmin\",\n  \"description\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "List users in a role",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/userroles/:role/users",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "userroles",
+                ":role",
+                "users"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "role",
+                  "value": "{{role_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `listRoleUsers`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Add user to role",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/userroles/:role/users?id={{id}}",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "userroles",
+                ":role",
+                "users"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "{{id}}",
+                  "disabled": false,
+                  "description": "User email address"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "role",
+                  "value": "{{role_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `addUserToRole`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Roles"
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get analytics stats",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{edge_base_url}}/organizations/:org/environments/:env/stats/:dimension?select={{select}}&timeRange={{timeRange}}",
+              "host": [
+                "{{edge_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "stats",
+                ":dimension"
+              ],
+              "query": [
+                {
+                  "key": "select",
+                  "value": "{{select}}",
+                  "disabled": false,
+                  "description": "Metrics to return (e.g. sum(message_count),avg(total_response_time))"
+                },
+                {
+                  "key": "timeRange",
+                  "value": "{{timeRange}}",
+                  "disabled": false,
+                  "description": "Time range (e.g. 01/01/2024 00:00~01/31/2024 23:59)"
+                },
+                {
+                  "key": "timeUnit",
+                  "value": "{{timeUnit}}",
+                  "disabled": true
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}",
+                  "disabled": true,
+                  "description": "Filter expression (e.g. (apiproxy eq 'MyProxy'))"
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "offset",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "sortby",
+                  "value": "{{sortby}}",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "{{sort}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Organization name"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "dimension",
+                  "value": "apis",
+                  "description": "Dimension to query (e.g. apis, apiproducts, devs, apps)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `getAnalyticsStats`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Analytics"
+    }
+  ],
+  "variable": [
+    {
+      "key": "edge_base_url",
+      "value": "https://api.enterprise.apigee.com/v1",
+      "type": "string"
+    },
+    {
+      "key": "apigee_username",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "apigee_password",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "org",
+      "value": "my-org",
+      "type": "string"
+    },
+    {
+      "key": "env",
+      "value": "prod",
+      "type": "string"
+    },
+    {
+      "key": "api_name",
+      "value": "my-api-proxy",
+      "type": "string"
+    },
+    {
+      "key": "revision",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "product_name",
+      "value": "my-product",
+      "type": "string"
+    },
+    {
+      "key": "developer_email",
+      "value": "developer@example.com",
+      "type": "string"
+    },
+    {
+      "key": "app_name",
+      "value": "my-app",
+      "type": "string"
+    },
+    {
+      "key": "consumer_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "kvm_name",
+      "value": "my-kvm",
+      "type": "string"
+    },
+    {
+      "key": "cache_name",
+      "value": "my-cache",
+      "type": "string"
+    },
+    {
+      "key": "virtualhost_name",
+      "value": "default",
+      "type": "string"
+    },
+    {
+      "key": "targetserver_name",
+      "value": "my-target",
+      "type": "string"
+    },
+    {
+      "key": "user_email",
+      "value": "admin@example.com",
+      "type": "string"
+    },
+    {
+      "key": "role_name",
+      "value": "opsadmin",
+      "type": "string"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// \u2500\u2500\u2500 Apigee Edge Auth Helper \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+          "// This collection uses HTTP Basic Auth by default.",
+          "// Set 'apigee_username' and 'apigee_password' collection variables.",
+          "//",
+          "// To use OAuth2 instead:",
+          "//   POST https://login.apigee.com/oauth/token",
+          "//   Body: username={{apigee_username}}&password={{apigee_password}}&grant_type=password",
+          "//   Save the returned access_token and switch Auth type to Bearer.",
+          "//",
+          "// SAML/SSO orgs: use the SSO token endpoint at your IdP."
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test: check response is not 5xx",
+          "pm.test('Status code is not 5xx', function () {",
+          "    pm.expect(pm.response.code).to.be.below(500);",
+          "});",
+          "",
+          "// Auto-capture common IDs from responses",
+          "try {",
+          "    const body = pm.response.json();",
+          "    if (body && body.consumerKey) {",
+          "        pm.collectionVariables.set('consumer_key', body.consumerKey);",
+          "        console.log('[Edge] consumer_key saved: ' + body.consumerKey);",
+          "    }",
+          "    if (body && body.developerId) {",
+          "        pm.collectionVariables.set('developer_id', body.developerId);",
+          "    }",
+          "} catch(e) {}"
+        ]
+      }
+    }
+  ]
+}
