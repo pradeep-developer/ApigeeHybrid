@@ -1,0 +1,4905 @@
+{
+  "info": {
+    "_postman_id": "dd9d8471-a246-4241-99ea-ea4d64b65779",
+    "name": "Apigee X / GCP Hybrid Management API",
+    "description": "The Apigee X and Hybrid Management API (apigee.googleapis.com) provides\nprogrammatic access to Apigee resources deployed on Google Cloud Platform.\nThis includes API proxies, shared flows, environments, environment groups,\ndevelopers, apps, API products, deployments, analytics, debug sessions,\ninstances (hybrid), and more.\n\nBase URL: https://apigee.googleapis.com/v1\n\n**Authentication:** Google OAuth 2.0 or Service Account credentials.\nAll requests require an `Authorization: Bearer <token>` header obtained\nvia Google Cloud credentials.\n\n**Resource naming:** All resources follow the GCP resource naming convention:\n`projects/{project}/...` or `organizations/{org}/...`\n\n**IAM:** Access is controlled by Google Cloud IAM roles such as\n`roles/apigee.admin`, `roles/apigee.apiAdminV2`, `roles/apigee.viewer`.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{access_token}}",
+        "type": "string"
+      }
+    ]
+  },
+  "item": [
+    {
+      "name": "Organizations",
+      "item": [
+        {
+          "name": "List organizations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations?parent={{parent}}",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations"
+              ],
+              "query": [
+                {
+                  "key": "parent",
+                  "value": "{{parent}}",
+                  "disabled": false,
+                  "description": "GCP project in the form: projects/{project_id}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create organization (provision Apigee on GCP project)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations?parent={{parent}}",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations"
+              ],
+              "query": [
+                {
+                  "key": "parent",
+                  "value": "{{parent}}",
+                  "disabled": false,
+                  "description": "GCP project: projects/{project_id}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-gcp-project\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"TYPE_UNSPECIFIED\",\n  \"analyticsRegion\": \"us-central1\",\n  \"authorizedNetwork\": \"default\",\n  \"runtimeType\": \"RUNTIME_TYPE_UNSPECIFIED\",\n  \"projectId\": \"string\",\n  \"runtimeDatabaseEncryptionKeyName\": \"string\",\n  \"billingType\": \"BILLING_TYPE_UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get organization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update organization",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-gcp-project\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"TYPE_UNSPECIFIED\",\n  \"analyticsRegion\": \"us-central1\",\n  \"authorizedNetwork\": \"default\",\n  \"runtimeType\": \"RUNTIME_TYPE_UNSPECIFIED\",\n  \"projectId\": \"string\",\n  \"runtimeDatabaseEncryptionKeyName\": \"string\",\n  \"billingType\": \"BILLING_TYPE_UNSPECIFIED\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete organization",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Organizations"
+    },
+    {
+      "name": "Environments",
+      "item": [
+        {
+          "name": "List environments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create environment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true,
+                  "description": "Name of the environment to create"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"prod\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"ENVIRONMENT_TYPE_UNSPECIFIED\",\n  \"deploymentType\": \"DEPLOYMENT_TYPE_UNSPECIFIED\",\n  \"apiProxyType\": \"API_PROXY_TYPE_UNSPECIFIED\",\n  \"forwardProxyUri\": \"string\",\n  \"nodeConfig\": {\n    \"minNodeCount\": \"string\",\n    \"maxNodeCount\": \"string\"\n  },\n  \"properties\": {\n    \"property\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update environment",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"prod\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"type\": \"ENVIRONMENT_TYPE_UNSPECIFIED\",\n  \"deploymentType\": \"DEPLOYMENT_TYPE_UNSPECIFIED\",\n  \"apiProxyType\": \"API_PROXY_TYPE_UNSPECIFIED\",\n  \"forwardProxyUri\": \"string\",\n  \"nodeConfig\": {\n    \"minNodeCount\": \"string\",\n    \"maxNodeCount\": \"string\"\n  },\n  \"properties\": {\n    \"property\": [\n      {\n        \"name\": \"string\",\n        \"value\": \"string\"\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete environment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Environments"
+    },
+    {
+      "name": "Environment Groups",
+      "item": [
+        {
+          "name": "List environment groups",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "pageToken",
+                  "value": "{{pageToken}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create environment group",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"hostnames\": [\n    \"api.example.com\",\n    \"api2.example.com\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get environment group",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update environment group",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup"
+              ],
+              "query": [
+                {
+                  "key": "updateMask",
+                  "value": "{{updateMask}}",
+                  "disabled": true,
+                  "description": "Comma-separated list of fields to update"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.patch`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"hostnames\": [\n    \"api.example.com\",\n    \"api2.example.com\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete environment group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.delete`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List environment group attachments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup/attachments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup",
+                "attachments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.attachments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Attach environment to environment group",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup/attachments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup",
+                "attachments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.attachments.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environment\": \"prod\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get environment group attachment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup/attachments/:attachment",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup",
+                "attachments",
+                ":attachment"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                },
+                {
+                  "key": "attachment",
+                  "value": "{{attachment_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.attachments.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Detach environment from environment group",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/envgroups/:envgroup/attachments/:attachment",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "envgroups",
+                ":envgroup",
+                "attachments",
+                ":attachment"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "envgroup",
+                  "value": "{{envgroup_name}}"
+                },
+                {
+                  "key": "attachment",
+                  "value": "{{attachment_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.envgroups.attachments.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Environment Groups"
+    },
+    {
+      "name": "API Proxies",
+      "item": [
+        {
+          "name": "List API proxies",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis"
+              ],
+              "query": [
+                {
+                  "key": "includeRevisions",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "includeMetaData",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create or import API proxy",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true,
+                  "description": "Set to 'import' to import a proxy bundle"
+                },
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true,
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "validate",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"my-api-proxy\",\n  \"revision\": [\n    \"string\"\n  ],\n  \"labels\": {},\n  \"metaData\": {\n    \"createdAt\": \"1704067200000\",\n    \"lastModifiedAt\": \"1704067200000\",\n    \"subType\": \"string\"\n  },\n  \"apiProxyType\": \"API_PROXY_TYPE_UNSPECIFIED\",\n  \"readOnly\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get API proxy",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API proxy (all revisions)",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.delete`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List API proxy revisions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api/revisions",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.revisions.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get API proxy revision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api/revisions/:revision",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision"
+              ],
+              "query": [
+                {
+                  "key": "format",
+                  "value": "{{format}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.revisions.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update API proxy revision (update bundle)",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api/revisions/:revision",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision"
+              ],
+              "query": [
+                {
+                  "key": "validate",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.revisions.updateApiProxyRevision`\n\n",
+            "body": {
+              "mode": "file",
+              "file": {
+                "src": ""
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API proxy revision",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api/revisions/:revision",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.revisions.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: API Proxies"
+    },
+    {
+      "name": "Shared Flows",
+      "item": [
+        {
+          "name": "List shared flows",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/sharedflows",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "sharedflows"
+              ],
+              "query": [
+                {
+                  "key": "includeRevisions",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "includeMetaData",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.sharedflows.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Import shared flow bundle",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/sharedflows",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "sharedflows"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true
+                },
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.sharedflows.create`\n\n",
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": ""
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get shared flow",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/sharedflows/:sharedflow",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "sharedflows",
+                ":sharedflow"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "sharedflow",
+                  "value": "{{sharedflow_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.sharedflows.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete shared flow",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/sharedflows/:sharedflow",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "sharedflows",
+                ":sharedflow"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "sharedflow",
+                  "value": "{{sharedflow_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.sharedflows.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Shared Flows"
+    },
+    {
+      "name": "Deployments",
+      "item": [
+        {
+          "name": "List all deployments in an organization",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "sharedFlows",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Set to true to include shared flow deployments"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.deployments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List all deployments in an environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "sharedFlows",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.deployments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List deployments of an API proxy revision",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apis.revisions.deployments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get deployment of an API proxy revision in an environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.getDeployments`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Deploy API proxy revision to environment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "override",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Force deploy over existing deployed revision"
+                },
+                {
+                  "key": "sequencedRollout",
+                  "value": "false",
+                  "disabled": true,
+                  "description": "Enable sequenced rollout (zero downtime)"
+                },
+                {
+                  "key": "serviceAccount",
+                  "value": "{{serviceAccount}}",
+                  "disabled": true,
+                  "description": "GCP service account for runtime auth"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.deploy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Undeploy API proxy revision from environment",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "sequencedRollout",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.undeploy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List deployments of an API proxy in an environment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.deployments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Deploy shared flow revision to environment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/sharedflows/:sharedflow/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "sharedflows",
+                ":sharedflow",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "query": [
+                {
+                  "key": "override",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "serviceAccount",
+                  "value": "{{serviceAccount}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "sharedflow",
+                  "value": "{{sharedflow_name}}"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.sharedflows.revisions.deploy`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Undeploy shared flow revision",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/sharedflows/:sharedflow/revisions/:revision/deployments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "sharedflows",
+                ":sharedflow",
+                "revisions",
+                ":revision",
+                "deployments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "sharedflow",
+                  "value": "{{sharedflow_name}}"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.sharedflows.revisions.undeploy`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Deployments"
+    },
+    {
+      "name": "API Products",
+      "item": [
+        {
+          "name": "List API products",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apiproducts",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "startKey",
+                  "value": "{{startKey}}",
+                  "disabled": true
+                },
+                {
+                  "key": "attributename",
+                  "value": "{{attributename}}",
+                  "disabled": true
+                },
+                {
+                  "key": "attributevalue",
+                  "value": "{{attributevalue}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apiproducts.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create API product",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apiproducts",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apiproducts.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MyApiProduct\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"approvalType\": \"auto\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"environments\": [\n    \"string\"\n  ],\n  \"proxies\": [\n    \"string\"\n  ],\n  \"operationGroup\": {\n    \"operationConfigs\": [\n      {\n        \"apiSource\": \"string\",\n        \"operations\": [\n          {}\n        ],\n        \"quota\": {\n          \"limit\": {},\n          \"interval\": {},\n          \"timeUnit\": {}\n        }\n      }\n    ],\n    \"operationConfigType\": \"OPERATION_CONFIG_TYPE_UNSPECIFIED\"\n  },\n  \"apiResources\": [\n    \"string\"\n  ],\n  \"quota\": \"string\",\n  \"quotaInterval\": \"string\",\n  \"quotaTimeUnit\": \"minute\",\n  \"scopes\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get API product",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apiproducts.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update API product",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apiproducts.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"MyApiProduct\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"approvalType\": \"auto\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"environments\": [\n    \"string\"\n  ],\n  \"proxies\": [\n    \"string\"\n  ],\n  \"operationGroup\": {\n    \"operationConfigs\": [\n      {\n        \"apiSource\": \"string\",\n        \"operations\": [\n          {}\n        ],\n        \"quota\": {\n          \"limit\": {},\n          \"interval\": {},\n          \"timeUnit\": {}\n        }\n      }\n    ],\n    \"operationConfigType\": \"OPERATION_CONFIG_TYPE_UNSPECIFIED\"\n  },\n  \"apiResources\": [\n    \"string\"\n  ],\n  \"quota\": \"string\",\n  \"quotaInterval\": \"string\",\n  \"quotaTimeUnit\": \"minute\",\n  \"scopes\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete API product",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/apiproducts/:product",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "apiproducts",
+                ":product"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "product",
+                  "value": "{{product_name}}",
+                  "description": "API product name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.apiproducts.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: API Products"
+    },
+    {
+      "name": "Developers",
+      "item": [
+        {
+          "name": "List developers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "startKey",
+                  "value": "{{startKey}}",
+                  "disabled": true
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "disabled": true
+                },
+                {
+                  "key": "includeCompany",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create developer",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"userName\": \"string\",\n  \"status\": \"active\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"accessType\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get developer",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Set developer status",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer?action={{action}}",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": false
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.setDeveloperStatus`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update developer",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"developer@example.com\",\n  \"firstName\": \"string\",\n  \"lastName\": \"string\",\n  \"userName\": \"string\",\n  \"status\": \"active\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"accessType\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete developer",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Developers"
+    },
+    {
+      "name": "Developer Apps",
+      "item": [
+        {
+          "name": "List developer apps",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps"
+              ],
+              "query": [
+                {
+                  "key": "expand",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "count",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "startKey",
+                  "value": "{{startKey}}",
+                  "disabled": true
+                },
+                {
+                  "key": "shallowExpand",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create developer app",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"callbackUrl\": \"string\",\n  \"status\": \"approved\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"apiProducts\": [\n    \"string\"\n  ],\n  \"appFamily\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get developer app",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update developer app",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"callbackUrl\": \"string\",\n  \"status\": \"approved\",\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ],\n  \"apiProducts\": [\n    \"string\"\n  ],\n  \"appFamily\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete developer app",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Developer Apps"
+    },
+    {
+      "name": "App Keys",
+      "item": [
+        {
+          "name": "Get app consumer key",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.keys.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Manage consumer key (approve/revoke)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "query": [
+                {
+                  "key": "action",
+                  "value": "{{action}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.keys.updateDeveloperAppKey`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consumerKey\": \"string\",\n  \"consumerSecret\": \"string\",\n  \"apiProducts\": [\n    {}\n  ],\n  \"status\": \"approved\",\n  \"issuedAt\": \"1704067200000\",\n  \"expiresAt\": \"1704067200000\",\n  \"expiresInSeconds\": \"string\",\n  \"scopes\": [\n    \"string\"\n  ],\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update consumer key (replace API products or attributes)",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.keys.replaceDeveloperAppKey`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"consumerKey\": \"string\",\n  \"consumerSecret\": \"string\",\n  \"apiProducts\": [\n    {}\n  ],\n  \"status\": \"approved\",\n  \"issuedAt\": \"1704067200000\",\n  \"expiresAt\": \"1704067200000\",\n  \"expiresInSeconds\": \"string\",\n  \"scopes\": [\n    \"string\"\n  ],\n  \"attributes\": [\n    {\n      \"name\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete consumer key",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/developers/:developer/apps/:app/keys/:key",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "developers",
+                ":developer",
+                "apps",
+                ":app",
+                "keys",
+                ":key"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "developer",
+                  "value": "{{developer_email}}",
+                  "description": "Developer email address or developer ID"
+                },
+                {
+                  "key": "app",
+                  "value": "{{app_name}}",
+                  "description": "App name"
+                },
+                {
+                  "key": "key",
+                  "value": "{{consumer_key}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.developers.apps.keys.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: App Keys"
+    },
+    {
+      "name": "Keystores & Aliases",
+      "item": [
+        {
+          "name": "List keystores",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create keystore",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores"
+              ],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "{{name}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get keystore",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores/:keystore",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores",
+                ":keystore"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "keystore",
+                  "value": "{{keystore_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete keystore",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores/:keystore",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores",
+                ":keystore"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "keystore",
+                  "value": "{{keystore_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.delete`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List aliases in a keystore",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores/:keystore/aliases",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores",
+                ":keystore",
+                "aliases"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "keystore",
+                  "value": "{{keystore_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.aliases.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create alias (upload cert/key)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keystores/:keystore/aliases?format={{format}}",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keystores",
+                ":keystore",
+                "aliases"
+              ],
+              "query": [
+                {
+                  "key": "alias",
+                  "value": "{{alias}}",
+                  "disabled": true
+                },
+                {
+                  "key": "format",
+                  "value": "{{format}}",
+                  "disabled": false
+                },
+                {
+                  "key": "ignoreNewlineValidation",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "ignoreExpiryValidation",
+                  "value": "false",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "keystore",
+                  "value": "{{keystore_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keystores.aliases.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sigAlg\": \"SHA1withRSA\",\n  \"subject\": {\n    \"commonName\": \"string\",\n    \"org\": \"string\",\n    \"orgUnit\": \"string\",\n    \"locality\": \"string\",\n    \"state\": \"string\",\n    \"countryCode\": \"string\",\n    \"email\": \"string\"\n  },\n  \"subjectAlternativeDnsNames\": {\n    \"subjectAlternativeName\": [\n      \"string\"\n    ]\n  },\n  \"keySize\": \"2048\",\n  \"certValidityInDays\": 365\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Keystores & Aliases"
+    },
+    {
+      "name": "Target Servers",
+      "item": [
+        {
+          "name": "List target servers",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/targetservers",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.targetservers.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create target server",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/targetservers",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.targetservers.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"host\": \"string\",\n  \"port\": 0,\n  \"isEnabled\": false,\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false,\n    \"protocols\": [\n      \"string\"\n    ],\n    \"ciphers\": [\n      \"string\"\n    ]\n  },\n  \"protocol\": \"HTTP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get target server",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.targetservers.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update target server",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.targetservers.update`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"host\": \"string\",\n  \"port\": 0,\n  \"isEnabled\": false,\n  \"sSLInfo\": {\n    \"enabled\": false,\n    \"clientAuthEnabled\": false,\n    \"keyStore\": \"string\",\n    \"keyAlias\": \"string\",\n    \"trustStore\": \"string\",\n    \"ignoreValidationErrors\": false,\n    \"protocols\": [\n      \"string\"\n    ],\n    \"ciphers\": [\n      \"string\"\n    ]\n  },\n  \"protocol\": \"HTTP\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete target server",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/targetservers/:targetserver",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "targetservers",
+                ":targetserver"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "targetserver",
+                  "value": "{{targetserver_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.targetservers.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Target Servers"
+    },
+    {
+      "name": "Key Value Maps",
+      "item": [
+        {
+          "name": "List KVMs at organization scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/keyvaluemaps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.keyvaluemaps.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create KVM at organization scope",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/keyvaluemaps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.keyvaluemaps.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"encrypted\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete KVM at organization scope",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/keyvaluemaps/:kvm",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.keyvaluemaps.delete`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "List KVMs at environment scope",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keyvaluemaps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keyvaluemaps.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create KVM at environment scope",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keyvaluemaps",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keyvaluemaps.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"encrypted\": false\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete KVM at environment scope",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/keyvaluemaps/:kvm",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "keyvaluemaps",
+                ":kvm"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "kvm",
+                  "value": "{{kvm_name}}",
+                  "description": "Key-value map name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.keyvaluemaps.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Key Value Maps"
+    },
+    {
+      "name": "Caches",
+      "item": [
+        {
+          "name": "List caches",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/caches",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.caches.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete cache",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/caches/:cache",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "caches",
+                ":cache"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "cache",
+                  "value": "{{cache_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.caches.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Caches"
+    },
+    {
+      "name": "Debug Sessions",
+      "item": [
+        {
+          "name": "List debug sessions",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/debugsessions",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "debugsessions"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.debugsessions.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create debug session",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/debugsessions",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "debugsessions"
+              ],
+              "query": [
+                {
+                  "key": "timeout",
+                  "value": "{{timeout}}",
+                  "disabled": true,
+                  "description": "Duration of the session in seconds (max 600)"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.debugsessions.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"validity\": 300,\n  \"count\": 10,\n  \"filter\": \"string\",\n  \"tracesize\": 0,\n  \"timeout\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get debug session",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/debugsessions/:session",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "debugsessions",
+                ":session"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                },
+                {
+                  "key": "session",
+                  "value": "{{session_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.debugsessions.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete debug session data",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/debugsessions/:session",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "debugsessions",
+                ":session"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                },
+                {
+                  "key": "session",
+                  "value": "{{session_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.debugsessions.deleteData`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get debug session transaction data",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/apis/:api/revisions/:revision/debugsessions/:session/data/:transaction",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "apis",
+                ":api",
+                "revisions",
+                ":revision",
+                "debugsessions",
+                ":session",
+                "data",
+                ":transaction"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "api",
+                  "value": "{{api_name}}",
+                  "description": "API proxy name"
+                },
+                {
+                  "key": "revision",
+                  "value": "{{revision}}",
+                  "description": "Revision number"
+                },
+                {
+                  "key": "session",
+                  "value": "{{session_id}}"
+                },
+                {
+                  "key": "transaction",
+                  "value": "{{transaction_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.apis.revisions.debugsessions.data.get`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Debug Sessions"
+    },
+    {
+      "name": "Analytics",
+      "item": [
+        {
+          "name": "Get analytics stats for a dimension",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/environments/:env/stats/:dimension?select={{select}}&timeRange={{timeRange}}",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "environments",
+                ":env",
+                "stats",
+                ":dimension"
+              ],
+              "query": [
+                {
+                  "key": "select",
+                  "value": "{{select}}",
+                  "disabled": false,
+                  "description": "Metric expression (e.g. sum(message_count))"
+                },
+                {
+                  "key": "timeRange",
+                  "value": "{{timeRange}}",
+                  "disabled": false,
+                  "description": "Time range: MM/DD/YYYY HH:MM~MM/DD/YYYY HH:MM"
+                },
+                {
+                  "key": "timeUnit",
+                  "value": "{{timeUnit}}",
+                  "disabled": true
+                },
+                {
+                  "key": "filter",
+                  "value": "{{filter}}",
+                  "disabled": true
+                },
+                {
+                  "key": "limit",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "offset",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "realtime",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "sortby",
+                  "value": "{{sortby}}",
+                  "disabled": true
+                },
+                {
+                  "key": "sort",
+                  "value": "{{sort}}",
+                  "disabled": true
+                },
+                {
+                  "key": "topk",
+                  "value": "{{topk}}",
+                  "disabled": true
+                },
+                {
+                  "key": "tsAscending",
+                  "value": "false",
+                  "disabled": true
+                },
+                {
+                  "key": "tzo",
+                  "value": "{{tzo}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "env",
+                  "value": "{{env}}",
+                  "description": "Environment name"
+                },
+                {
+                  "key": "dimension",
+                  "value": "apis",
+                  "description": "Dimension to query (e.g. apis, apiproducts, devs, apps, targets)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.environments.stats.get`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Analytics"
+    },
+    {
+      "name": "Instances (Hybrid)",
+      "item": [
+        {
+          "name": "List hybrid instances",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances"
+              ],
+              "query": [
+                {
+                  "key": "pageSize",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "pageToken",
+                  "value": "{{pageToken}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Create hybrid instance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"location\": \"us-central1\",\n  \"peeringCidrRange\": \"CIDR_RANGE_UNSPECIFIED\",\n  \"ipRange\": \"string\",\n  \"diskEncryptionKeyName\": \"string\",\n  \"consumerAcceptList\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get hybrid instance",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Update hybrid instance",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance"
+              ],
+              "query": [
+                {
+                  "key": "updateMask",
+                  "value": "{{updateMask}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.patch`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"string\",\n  \"displayName\": \"string\",\n  \"description\": \"string\",\n  \"location\": \"us-central1\",\n  \"peeringCidrRange\": \"CIDR_RANGE_UNSPECIFIED\",\n  \"ipRange\": \"string\",\n  \"diskEncryptionKeyName\": \"string\",\n  \"consumerAcceptList\": [\n    \"string\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete hybrid instance",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Instances (Hybrid)"
+    },
+    {
+      "name": "Instance Attachments (Hybrid)",
+      "item": [
+        {
+          "name": "List instance attachments (environments)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance/attachments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance",
+                "attachments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.attachments.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Attach environment to hybrid instance",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance/attachments",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance",
+                "attachments"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.attachments.create`\n\n",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"environment\": \"string\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get instance attachment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance/attachments/:attachment",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance",
+                "attachments",
+                ":attachment"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                },
+                {
+                  "key": "attachment",
+                  "value": "{{attachment_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.attachments.get`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Detach environment from hybrid instance",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/instances/:instance/attachments/:attachment",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "instances",
+                ":instance",
+                "attachments",
+                ":attachment"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "instance",
+                  "value": "{{instance_name}}"
+                },
+                {
+                  "key": "attachment",
+                  "value": "{{attachment_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.instances.attachments.delete`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Instance Attachments (Hybrid)"
+    },
+    {
+      "name": "Operations",
+      "item": [
+        {
+          "name": "List long-running operations",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/operations",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "operations"
+              ],
+              "query": [
+                {
+                  "key": "filter",
+                  "value": "{{filter}}",
+                  "disabled": true
+                },
+                {
+                  "key": "pageSize",
+                  "value": "1",
+                  "disabled": true
+                },
+                {
+                  "key": "pageToken",
+                  "value": "{{pageToken}}",
+                  "disabled": true
+                }
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.operations.list`\n\n"
+          },
+          "response": []
+        },
+        {
+          "name": "Get long-running operation",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{apigee_x_base_url}}/organizations/:org/operations/:operation",
+              "host": [
+                "{{apigee_x_base_url}}"
+              ],
+              "path": [
+                "organizations",
+                ":org",
+                "operations",
+                ":operation"
+              ],
+              "variable": [
+                {
+                  "key": "org",
+                  "value": "{{org}}",
+                  "description": "Apigee organization name (same as GCP project ID for Apigee X)"
+                },
+                {
+                  "key": "operation",
+                  "value": "{{operation_id}}"
+                }
+              ]
+            },
+            "description": "**Operation ID:** `apigee.organizations.operations.get`\n\n"
+          },
+          "response": []
+        }
+      ],
+      "description": "Operations for: Operations"
+    }
+  ],
+  "variable": [
+    {
+      "key": "apigee_x_base_url",
+      "value": "https://apigee.googleapis.com/v1",
+      "type": "string"
+    },
+    {
+      "key": "access_token",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "org",
+      "value": "my-gcp-project",
+      "type": "string"
+    },
+    {
+      "key": "env",
+      "value": "prod",
+      "type": "string"
+    },
+    {
+      "key": "api_name",
+      "value": "my-api-proxy",
+      "type": "string"
+    },
+    {
+      "key": "revision",
+      "value": "1",
+      "type": "string"
+    },
+    {
+      "key": "product_name",
+      "value": "my-product",
+      "type": "string"
+    },
+    {
+      "key": "developer_email",
+      "value": "developer@example.com",
+      "type": "string"
+    },
+    {
+      "key": "app_name",
+      "value": "my-app",
+      "type": "string"
+    },
+    {
+      "key": "consumer_key",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "kvm_name",
+      "value": "my-kvm",
+      "type": "string"
+    },
+    {
+      "key": "cache_name",
+      "value": "my-cache",
+      "type": "string"
+    },
+    {
+      "key": "targetserver_name",
+      "value": "my-target",
+      "type": "string"
+    },
+    {
+      "key": "envgroup_name",
+      "value": "my-envgroup",
+      "type": "string"
+    },
+    {
+      "key": "attachment_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "instance_name",
+      "value": "my-instance",
+      "type": "string"
+    },
+    {
+      "key": "keystore_name",
+      "value": "my-keystore",
+      "type": "string"
+    },
+    {
+      "key": "sharedflow_name",
+      "value": "my-sharedflow",
+      "type": "string"
+    },
+    {
+      "key": "session_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "transaction_id",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "operation_id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// \u2500\u2500\u2500 GCP OAuth2 Token Helper \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+          "// Automatically fetches a new GCP access token using a service account key.",
+          "// Set the 'service_account_json' variable to your service account JSON string,",
+          "// or set 'access_token' directly if you already have a token.",
+          "//",
+          "// To use gcloud CLI token: run `gcloud auth print-access-token` and paste into",
+          "// the 'access_token' collection variable.",
+          "//",
+          "// Required scopes: https://www.googleapis.com/auth/cloud-platform",
+          "",
+          "const accessToken = pm.collectionVariables.get('access_token');",
+          "if (!accessToken || accessToken === '') {",
+          "    console.warn('[Apigee X] access_token is not set. Set it via:');",
+          "    console.warn('  gcloud auth print-access-token');",
+          "    console.warn('  Or use a service account key with Google OAuth2.');",
+          "}"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "// Global test: check response is not 5xx",
+          "pm.test('Status code is not 5xx', function () {",
+          "    pm.expect(pm.response.code).to.be.below(500);",
+          "});",
+          "",
+          "// Auto-capture operation name for long-running operations",
+          "try {",
+          "    const body = pm.response.json();",
+          "    if (body && body.name && body.name.includes('/operations/')) {",
+          "        const opId = body.name.split('/operations/')[1];",
+          "        pm.collectionVariables.set('operation_id', opId);",
+          "        console.log('[Apigee X] Long-running operation captured: ' + opId);",
+          "    }",
+          "} catch(e) {}"
+        ]
+      }
+    }
+  ]
+}
